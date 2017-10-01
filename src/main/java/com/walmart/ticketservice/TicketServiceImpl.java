@@ -20,7 +20,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public SeatHold findAndHoldSeats(int numSeats, String customerEmail) {
-		// TODO Auto-generated method stub
+		venue.holdSeats(numSeats);
 		return null;
 	}
 
