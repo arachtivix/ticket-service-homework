@@ -9,7 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TicketServiceApplication implements CommandLineRunner {
 	
 	@Autowired
-	TicketService ticketService;
+	private InteractiveCommandLine commandLine;
+	
+	@Autowired
+	private TicketService ticketService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(TicketServiceApplication.class, args);
@@ -17,7 +20,7 @@ public class TicketServiceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+		commandLine.run();
 	}
 	
 }

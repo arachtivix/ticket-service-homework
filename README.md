@@ -1,1 +1,1 @@
-This project was created using a starter project from https://start.spring.io/ and imported to Eclipse.
+This project was created using a starter project from https://start.spring.io/ and imported to Eclipse.  It is a SpringBoot application designed to be used at the console.
