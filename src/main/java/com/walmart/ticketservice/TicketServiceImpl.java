@@ -15,7 +15,6 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public int numSeatsAvailable() {
-		// TODO Auto-generated method stub
 		return venue.getNumSeats();
 	}
 
