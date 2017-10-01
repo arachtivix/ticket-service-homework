@@ -23,7 +23,7 @@ public class TicketServiceImpl implements TicketService {
 		try{
 			venue.holdSeats(numSeats);
 		} catch( SeatsUnavailableException e ) {
-			
+			e.printStackTrace();
 		}
 		return null;
 	}
