@@ -1,14 +1,22 @@
 package com.walmart.ticketservice;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TicketServiceImpl implements TicketService {
+	
+	private Venue venue;
+	
+	@Autowired
+	public TicketServiceImpl(Venue venue){
+		this.venue = venue;
+	}
 
 	@Override
 	public int numSeatsAvailable() {
 		// TODO Auto-generated method stub
-		return 0;
+		return venue.getNumSeats();
 	}
 
 	@Override
