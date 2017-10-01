@@ -19,16 +19,21 @@ public class VenueTests {
 	
 	@Test
 	public void testGetNumSeatsGreaterThanOrEqualToOne() {
-		int numSeats = venue.getNumSeats();
+		int numSeats = venue.getSeatingCapacity();
 		assertThat(numSeats,greaterThanOrEqualTo(1));
 	}
 	
 	@Test
-	public void testHoldSeatsReducesAvailableSeatCountByNumberRequested() {
+	public void testHoldSeatsReducesAvailableSeatCountByNumberRequested() throws SeatsUnavailableException {
 		int numSeatsBefore = venue.getNumSeatsAvailable();
 		venue.holdSeats(2);
 		int numSeatsAfter = venue.getNumSeatsAvailable();
 		assertThat(numSeatsBefore - numSeatsAfter, equalTo(2));
+	}
+	
+	@Test(expected = SeatsUnavailableException.class)
+	public void testHoldSeatsThrowsExceptionWhenEntireVenueUnableToAccommodateNumberOfSeatsRequested() throws SeatsUnavailableException {
+		venue.holdSeats(venue.getSeatingCapacity() + 1);
 	}
 	
 }

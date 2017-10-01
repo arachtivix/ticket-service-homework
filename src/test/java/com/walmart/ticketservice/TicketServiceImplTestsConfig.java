@@ -2,7 +2,6 @@ package com.walmart.ticketservice;
 
 import static org.mockito.Mockito.*;
 
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +18,7 @@ public class TicketServiceImplTestsConfig {
 	@Bean
 	public Venue getVenue(){
 		Venue mockVenue = mock(Venue.class);
-		when(mockVenue.getNumSeats()).thenReturn(1000);
+		when(mockVenue.getSeatingCapacity()).thenReturn(1000);
 		
 		return mockVenue;
 	}

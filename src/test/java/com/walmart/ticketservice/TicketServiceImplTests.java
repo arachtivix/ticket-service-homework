@@ -39,11 +39,11 @@ public class TicketServiceImplTests {
 	@Test
 	public void testSeatsAvailableEqualsSeatsInVenueWhenNoAssignmentsMadeYet(){
 		int seatsAvailable = ticketServiceImpl.numSeatsAvailable();
-		assertThat(seatsAvailable, equalTo(venue.getNumSeats()));
+		assertThat(seatsAvailable, equalTo(venue.getSeatingCapacity()));
 	}
 	
 	@Test
-	public void testServiceAsksVenueToHoldSeatsWhenFindAndHoldSeatsIsCalled(){
+	public void testServiceAsksVenueToHoldSeatsWhenFindAndHoldSeatsIsCalled() throws SeatsUnavailableException{
 		ticketServiceImpl.findAndHoldSeats(2, "test@test.com");
 		Mockito.verify(venue, Mockito.times(1)).holdSeats(2);
 	}

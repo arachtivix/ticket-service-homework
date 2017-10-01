@@ -15,12 +15,16 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public int numSeatsAvailable() {
-		return venue.getNumSeats();
+		return venue.getSeatingCapacity();
 	}
 
 	@Override
 	public SeatHold findAndHoldSeats(int numSeats, String customerEmail) {
-		venue.holdSeats(numSeats);
+		try{
+			venue.holdSeats(numSeats);
+		} catch( SeatsUnavailableException e ) {
+			
+		}
 		return null;
 	}
 

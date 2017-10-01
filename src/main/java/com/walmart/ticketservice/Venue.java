@@ -2,24 +2,28 @@ package com.walmart.ticketservice;
 
 public class Venue {
 	
-	private int numSeats;
+	private int seatingCapacity;
 	private int numHeldSeats;
 
 	public Venue(int numSeats){
-		this.numSeats = numSeats;
+		this.seatingCapacity = numSeats;
 		numHeldSeats = 0;
 	}
 
-	public int getNumSeats() {
-		return numSeats;
+	public int getSeatingCapacity() {
+		return seatingCapacity;
 	}
 	
-	public void holdSeats(int numSeats) {
-		numHeldSeats += numSeats;
+	public void holdSeats(int numSeatsRequested) throws SeatsUnavailableException {
+		if( numSeatsRequested <= seatingCapacity){
+			numHeldSeats += numSeatsRequested;
+		} else {
+			throw new SeatsUnavailableException("User asked for quantity of seats greater than number of seats in the venue");
+		}
 	}
 	
 	public int getNumSeatsAvailable() {
-		return numSeats - numHeldSeats;
+		return seatingCapacity - numHeldSeats;
 	}
 	
 }
