@@ -15,10 +15,12 @@ public class Venue {
 	}
 	
 	public void holdSeats(int numSeatsRequested) throws SeatsUnavailableException {
-		if( numSeatsRequested <= seatingCapacity){
-			numHeldSeats += numSeatsRequested;
-		} else {
+		if( numSeatsRequested > seatingCapacity) {
 			throw new SeatsUnavailableException("User asked for quantity of seats greater than number of seats in the venue");
+		} else if( numSeatsRequested > seatingCapacity - numHeldSeats ) {
+			throw new SeatsUnavailableException("User asked for more seats than there were available");
+		} else {
+			numHeldSeats += numSeatsRequested;
 		}
 	}
 	

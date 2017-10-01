@@ -1,8 +1,10 @@
 package com.walmart.ticketservice;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +36,16 @@ public class VenueTests {
 	@Test(expected = SeatsUnavailableException.class)
 	public void testHoldSeatsThrowsExceptionWhenEntireVenueUnableToAccommodateNumberOfSeatsRequested() throws SeatsUnavailableException {
 		venue.holdSeats(venue.getSeatingCapacity() + 1);
+	}
+	
+	@Test(expected = SeatsUnavailableException.class)
+	public void testHoldSeatsThrowsExceptionWhenUserTriesToHoldMoreSeatsThanAreAvailableAfterExistingHolds() throws SeatsUnavailableException {
+		try{
+			venue.holdSeats(venue.getNumSeatsAvailable() - 1);
+		} catch (SeatsUnavailableException e) {
+			Assert.fail(); // Setup needs to reserve all but one seat; if this does not work, we must fail the test
+		}
+		venue.holdSeats(2);
 	}
 	
 }
