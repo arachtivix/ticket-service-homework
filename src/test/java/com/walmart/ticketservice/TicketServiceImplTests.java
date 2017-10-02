@@ -16,7 +16,6 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=TicketServiceImplTestsConfig.class, loader=AnnotationConfigContextLoader.class)
-@SpringBootTest
 public class TicketServiceImplTests {
 	
 	@Autowired

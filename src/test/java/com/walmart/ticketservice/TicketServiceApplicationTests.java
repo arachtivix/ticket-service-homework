@@ -10,7 +10,6 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=TicketServiceApplicationTests.class, loader=AnnotationConfigContextLoader.class)
-@SpringBootTest
 public class TicketServiceApplicationTests {
 
 	@Test
