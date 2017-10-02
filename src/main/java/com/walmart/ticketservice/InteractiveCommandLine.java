@@ -33,6 +33,9 @@ public class InteractiveCommandLine implements Runnable {
 	@Value("${ticket-service.shell.cmd.find-and-hold-seats.description}")
 	private String findAndHoldSeatsCommandDescription;
 	
+	@Value("${ticket-service.shell.cmd.reserve-seats.results}")
+	private String findAndHoldSeatsCommandResults;
+	
 	@Value("${ticket-service.shell.cmd.reserve-seats.description}")
 	private String reserveSeatsCommandDescription;
 	
@@ -60,9 +63,16 @@ public class InteractiveCommandLine implements Runnable {
 			if( command.equalsIgnoreCase(numSeatsAvailableCommand) ){
 				System.out.println(ticketService.numSeatsAvailable());
 			} else if ( command.equalsIgnoreCase(findAndHoldSeatsCommand) ) {
-				
+				int numSeats = scanner.nextInt();
+				String email = scanner.next();
+				SeatHold seatHold = ticketService.findAndHoldSeats(numSeats, email);
+				int holdId = seatHold.getId();
+				System.out.println(String.format(findAndHoldSeatsCommandResults, holdId));
 			} else if ( command.equalsIgnoreCase(reserveSeatsCommand) ) {
-				
+				int holdId = scanner.nextInt();
+				String email = scanner.next();
+				String reserveResults = ticketService.reserveSeats(holdId, email);
+				System.out.println(reserveResults);
 			} else if ( command.equalsIgnoreCase(exitCommand) ) {
 				keepRunning = false;
 			}
