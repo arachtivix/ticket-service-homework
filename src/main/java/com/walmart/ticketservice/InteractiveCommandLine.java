@@ -51,6 +51,7 @@ public class InteractiveCommandLine implements Runnable {
 		System.out.println(String.format(numSeatsAvailableCommandDescription,numSeatsAvailableCommand));
 		System.out.println(String.format(findAndHoldSeatsCommandDescription,findAndHoldSeatsCommand));
 		System.out.println(String.format(reserveSeatsCommandDescription,reserveSeatsCommand));
+		System.out.println(String.format(exitDescription,exitCommand));
 		System.out.println(commandPrompt);
 		boolean keepRunning = true;
 		while( keepRunning ){
