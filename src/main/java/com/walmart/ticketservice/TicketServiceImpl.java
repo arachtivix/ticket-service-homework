@@ -36,13 +36,15 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public int numSeatsAvailable() {
-		return venue.getSeatingCapacity();
+		return venue.getNumSeatsAvailable();
 	}
 
 	@Override
 	public SeatHold findAndHoldSeats(int numSeats, String customerEmail) {
 		if( !emailValidator.validate(customerEmail) ){
 			throw new InvalidEmailException("Email supplied was invalid");
+		} else if( numSeats <= 0 ) {
+			throw new SeatsUnavailableException("Number of seats requested less than or equal to zero");
 		}
 		List<Seat> seatsHeld = venue.holdSeats(numSeats);
 		SeatHold hold = new SeatHold(holdIndex,seatsHeld,customerEmail);
@@ -62,7 +64,7 @@ public class TicketServiceImpl implements TicketService {
 		
 		reservations.put(seatHoldId, holds.remove(seatHoldId));
 		
-		return String.format(reserveSuccessMessage, hold.getId());
+		return String.format(reserveSuccessMessage, hold.getSeats().size(), hold.getEmail());
 	}
 
 }

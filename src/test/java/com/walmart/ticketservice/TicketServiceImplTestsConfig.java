@@ -21,7 +21,7 @@ public class TicketServiceImplTestsConfig {
 	@Bean
 	public Venue getVenue() {
 		Venue mockVenue = mock(Venue.class);
-		when(mockVenue.getSeatingCapacity()).thenReturn(1000);
+		when(mockVenue.getNumSeatsAvailable()).thenReturn(1000);
 		
 		return mockVenue;
 	}

@@ -53,7 +53,7 @@ public class TicketServiceImplTests {
 	@Test
 	public void testSeatsAvailableEqualsSeatsInVenueWhenNoAssignmentsMadeYet(){
 		int seatsAvailable = ticketServiceImpl.numSeatsAvailable();
-		assertThat(seatsAvailable, equalTo(venue.getSeatingCapacity()));
+		assertThat(seatsAvailable, equalTo(venue.getNumSeatsAvailable()));
 	}
 	
 	@Test
@@ -140,6 +140,16 @@ public class TicketServiceImplTests {
 
 		ticketServiceImpl.reserveSeats(result3.getId(), "test@test.com");
 		ticketServiceImpl.reserveSeats(result3.getId(), "test@test.com");
+	}
+	
+	@Test(expected = SeatsUnavailableException.class)
+	public void testFindAndHoldSeatsThrowsSeatsUnavailableExceptionIfRequestedSeatsIsZero() {
+		ticketServiceImpl.findAndHoldSeats(0, "test@test.com");
+	}
+	
+	@Test(expected = SeatsUnavailableException.class)
+	public void testFindAndHoldSeatsThrowsSeatsUnavailableExceptionIfRequestedSeatsIsLessThanZero() {
+		ticketServiceImpl.findAndHoldSeats(-1, "test@test.com");
 	}
 
 	private List<Seat> getSeatsList(int numSeats) {
