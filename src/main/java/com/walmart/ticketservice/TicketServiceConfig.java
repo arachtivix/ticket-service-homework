@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 
+import com.walmart.ticketservice.entities.Venue;
+
 @SpringBootConfiguration
 public class TicketServiceConfig {
 	

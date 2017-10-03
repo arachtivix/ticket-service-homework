@@ -22,6 +22,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import com.walmart.ticketservice.entities.Seat;
+import com.walmart.ticketservice.entities.SeatHold;
+import com.walmart.ticketservice.entities.Venue;
+import com.walmart.ticketservice.exceptions.InvalidEmailException;
+import com.walmart.ticketservice.exceptions.SeatsUnavailableException;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=TicketServiceImplTestsConfig.class, loader=AnnotationConfigContextLoader.class)
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)

@@ -1,4 +1,4 @@
-package com.walmart.ticketservice;
+package com.walmart.ticketservice.entities;
 
 import java.util.Collections;
 import java.util.List;

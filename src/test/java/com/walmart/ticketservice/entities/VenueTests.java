@@ -1,4 +1,4 @@
-package com.walmart.ticketservice;
+package com.walmart.ticketservice.entities;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -9,6 +9,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.walmart.ticketservice.entities.Seat;
+import com.walmart.ticketservice.entities.Venue;
+import com.walmart.ticketservice.exceptions.SeatsUnavailableException;
 
 public class VenueTests {
 	

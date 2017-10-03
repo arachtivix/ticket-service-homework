@@ -1,4 +1,4 @@
-package com.walmart.ticketservice;
+package com.walmart.ticketservice.entities;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import com.walmart.ticketservice.EmailValidatorImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=EmailValidatorImplTestsConfig.class, loader=AnnotationConfigContextLoader.class)

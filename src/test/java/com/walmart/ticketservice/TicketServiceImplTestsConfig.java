@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
+import com.walmart.ticketservice.entities.Venue;
+
 @TestConfiguration
 public class TicketServiceImplTestsConfig {
 	

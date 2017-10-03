@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.walmart.ticketservice.entities.SeatHold;
+
 @Component
 public class InteractiveCommandLine implements Runnable {
 	

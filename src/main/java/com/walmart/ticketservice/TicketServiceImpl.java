@@ -8,6 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.walmart.ticketservice.entities.Seat;
+import com.walmart.ticketservice.entities.SeatHold;
+import com.walmart.ticketservice.entities.Venue;
+import com.walmart.ticketservice.exceptions.InvalidEmailException;
+import com.walmart.ticketservice.exceptions.SeatsUnavailableException;
+
 @Component
 public class TicketServiceImpl implements TicketService {
 	

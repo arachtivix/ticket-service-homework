@@ -1,5 +1,7 @@
 package com.walmart.ticketservice;
 
+import com.walmart.ticketservice.entities.SeatHold;
+
 public interface TicketService {
 
 	int numSeatsAvailable();

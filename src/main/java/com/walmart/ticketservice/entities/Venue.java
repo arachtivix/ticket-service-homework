@@ -1,7 +1,9 @@
-package com.walmart.ticketservice;
+package com.walmart.ticketservice.entities;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import com.walmart.ticketservice.exceptions.SeatsUnavailableException;
 
 
 public class Venue {
