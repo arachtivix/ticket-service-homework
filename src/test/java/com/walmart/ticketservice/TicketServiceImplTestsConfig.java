@@ -12,16 +12,21 @@ public class TicketServiceImplTestsConfig {
 	
 	@Bean
 	@Autowired
-	public TicketServiceImpl getTicketService(Venue venue) {
-		return new TicketServiceImpl(venue);
+	public TicketServiceImpl getTicketService(Venue venue, EmailValidator emailValidator) {
+		return new TicketServiceImpl(venue,emailValidator);
 	}
 	
 	@Bean
-	public Venue getVenue(){
+	public Venue getVenue() {
 		Venue mockVenue = mock(Venue.class);
 		when(mockVenue.getSeatingCapacity()).thenReturn(1000);
 		
 		return mockVenue;
+	}
+	
+	@Bean
+	public EmailValidator getEmailValidator() {
+		return new EmailValidatorImpl();
 	}
 	
 }

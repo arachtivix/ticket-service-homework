@@ -8,11 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TicketServiceImpl implements TicketService {
 	
-	private Venue venue;
+	private final Venue venue;
+	private final EmailValidator emailValidator;
+	private int holdIndex = 0;
 	
 	@Autowired
-	public TicketServiceImpl(Venue venue){
+	public TicketServiceImpl(Venue venue, EmailValidator emailValidator){
 		this.venue = venue;
+		this.emailValidator = emailValidator;
 	}
 
 	@Override
@@ -22,8 +25,11 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public SeatHold findAndHoldSeats(int numSeats, String customerEmail) {
+		if( !emailValidator.validate(customerEmail) ){
+			throw new InvalidEmailException("Email supplied was invalid");
+		}
 		List<Seat> seatsHeld = venue.holdSeats(numSeats);
-		SeatHold hold = new SeatHold(0,seatsHeld);
+		SeatHold hold = new SeatHold(holdIndex++,seatsHeld);
 		return hold;
 	}
 

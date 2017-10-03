@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,14 +68,36 @@ public class TicketServiceImplTests {
 	
 	@Test
 	public void testServiceReturnsSeatHoldObjectWithTheNumerRequested() {
-		List<Seat> seats = new LinkedList<Seat>();
-		seats.add(new Seat());
-		seats.add(new Seat());
-		seats.add(new Seat());
+		List<Seat> seats = getSeatsList(3);
 		Mockito.when(venue.holdSeats(3)).thenReturn(seats);
 		
 		SeatHold result = ticketServiceImpl.findAndHoldSeats(3, "test@test.com");
 		assertThat(result.getSeats().size(), equalTo(3));
+	}
+	
+	@Test
+	public void testServiceReturnsDifferentIdsEachTimeSeatsRequested() {
+		List<Seat> seats3 = getSeatsList(3);
+		List<Seat> seats2 = getSeatsList(2);
+		Mockito.when(venue.holdSeats(3)).thenReturn(seats3);
+		Mockito.when(venue.holdSeats(2)).thenReturn(seats2);
+
+		SeatHold result3 = ticketServiceImpl.findAndHoldSeats(3, "test@test.com");
+		SeatHold result2 = ticketServiceImpl.findAndHoldSeats(2, "test@test.com");
+		assertThat(result3.getId(), Matchers.not(Matchers.equalTo(result2.getId())));
+	}
+	
+	@Test(expected = InvalidEmailException.class)
+	public void testServiceThrowsInvalidEmailExceptionIfEmailIsInvalid() {
+		ticketServiceImpl.findAndHoldSeats(3, "INVALID");
+	}
+
+	private List<Seat> getSeatsList(int numSeats) {
+		List<Seat> seats = new LinkedList<Seat>();
+		for( int i = 0; i < numSeats; i++ ){
+			seats.add(new Seat());
+		}
+		return seats;
 	}
 	
 }
