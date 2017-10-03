@@ -20,11 +20,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public SeatHold findAndHoldSeats(int numSeats, String customerEmail) {
-		try{
-			venue.holdSeats(numSeats);
-		} catch( SeatsUnavailableException e ) {
-			e.printStackTrace();
-		}
+		venue.holdSeats(numSeats);
 		return new SeatHold(0);
 	}
 

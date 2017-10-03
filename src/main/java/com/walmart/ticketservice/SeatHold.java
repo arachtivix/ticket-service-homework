@@ -2,13 +2,13 @@ package com.walmart.ticketservice;
 
 public class SeatHold {
 
-	private final int id;
+	private final Integer id;
 	
-	public SeatHold(int id){
+	public SeatHold(Integer id){
 		this.id = id;
 	}
 	
-	public int getId(){
+	public Integer getId(){
 		return id;
 	}
 	

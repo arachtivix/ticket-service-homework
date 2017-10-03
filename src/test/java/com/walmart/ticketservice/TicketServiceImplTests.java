@@ -56,4 +56,10 @@ public class TicketServiceImplTests {
 		Assert.assertNotNull(hold);
 	}
 	
+	@Test(expected = SeatsUnavailableException.class)
+	public void testServiceThrowsSeatsUnavailableExceptionWhenUnableToFulfillFindAndHoldSeats() {
+		Mockito.when(venue.holdSeats(Mockito.anyInt())).thenThrow(new SeatsUnavailableException("test"));
+		ticketServiceImpl.findAndHoldSeats(venue.getNumSeatsAvailable() + 1, "test@test.com");
+	}
+	
 }

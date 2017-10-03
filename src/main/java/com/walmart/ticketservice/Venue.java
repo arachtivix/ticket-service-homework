@@ -1,31 +1,47 @@
 package com.walmart.ticketservice;
 
+import java.util.LinkedList;
+import java.util.List;
+
+
 public class Venue {
 	
 	private int seatingCapacity;
-	private int numHeldSeats;
+	private List<Seat> openSeats, nonOpenSeats;
 
 	public Venue(int numSeats){
-		this.seatingCapacity = numSeats;
-		numHeldSeats = 0;
+		openSeats = new LinkedList<Seat>();
+		nonOpenSeats = new LinkedList<Seat>();
+		
+		for( int i = 0; i < numSeats; i++ ){
+			openSeats.add(new Seat());
+		}
+		
+		seatingCapacity = numSeats;
 	}
 
 	public int getSeatingCapacity() {
 		return seatingCapacity;
 	}
 	
-	public void holdSeats(int numSeatsRequested) throws SeatsUnavailableException {
+	public List<Seat> holdSeats(int numSeatsRequested) throws SeatsUnavailableException {
+		List<Seat> seatsHeld = new LinkedList<Seat>();
 		if( numSeatsRequested > seatingCapacity) {
 			throw new SeatsUnavailableException("User asked for quantity of seats greater than number of seats in the venue");
-		} else if( numSeatsRequested > seatingCapacity - numHeldSeats ) {
+		} else if( numSeatsRequested > openSeats.size() ) {
 			throw new SeatsUnavailableException("User asked for more seats than there were available");
 		} else {
-			numHeldSeats += numSeatsRequested;
+			for( int i = 0; i < numSeatsRequested; i++ ){
+				Seat currentSeat = openSeats.remove(0);
+				seatsHeld.add(currentSeat);
+				nonOpenSeats.add(currentSeat);
+			}
 		}
+		return seatsHeld;
 	}
 	
 	public int getNumSeatsAvailable() {
-		return seatingCapacity - numHeldSeats;
+		return openSeats.size();
 	}
 	
 }

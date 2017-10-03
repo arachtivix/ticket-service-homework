@@ -4,10 +4,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 public class VenueTests {
 	
@@ -45,6 +46,12 @@ public class VenueTests {
 			Assert.fail(); // Setup needs to reserve all but one seat; if this does not work, we must fail the test
 		}
 		venue.holdSeats(2);
+	}
+	
+	@Test
+	public void testHoldSeatsReturnsListOfTheSameNumberOfSeatsAsRequested() {
+		List<Seat> seatsHeld = venue.holdSeats(123);
+		Assert.assertEquals(123, seatsHeld.size());
 	}
 	
 }
