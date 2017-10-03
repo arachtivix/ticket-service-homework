@@ -14,11 +14,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.test.util.ReflectionTestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=TicketServiceImplTestsConfig.class, loader=AnnotationConfigContextLoader.class)
@@ -90,6 +92,38 @@ public class TicketServiceImplTests {
 	@Test(expected = InvalidEmailException.class)
 	public void testServiceThrowsInvalidEmailExceptionIfEmailIsInvalid() {
 		ticketServiceImpl.findAndHoldSeats(3, "INVALID");
+	}
+	
+	@Test(expected = SeatsUnavailableException.class)
+	public void testReserveSeatsThrowsSeatsUnavailableExceptionIfSeatHoldIdInvalid() {
+		ticketServiceImpl.reserveSeats(99, "test@test.com");
+	}
+	
+	@Test
+	public void testReserveSeatsReturnsSuccessMessageIfProperSeatHoldEmailComboPresented() {
+		List<Seat> seats3 = getSeatsList(3);
+		List<Seat> seats2 = getSeatsList(2);
+		Mockito.when(venue.holdSeats(3)).thenReturn(seats3);
+		Mockito.when(venue.holdSeats(2)).thenReturn(seats2);
+		
+		ticketServiceImpl.findAndHoldSeats(3, "testalso@test.com");
+		SeatHold result2 = ticketServiceImpl.findAndHoldSeats(2, "test@test.com");
+		
+		String response = ticketServiceImpl.reserveSeats(result2.getId(), "test@test.com");
+		Assert.assertNotNull(response);
+	}
+	
+	@Test(expected = InvalidEmailException.class)
+	public void testReserveSeatsThrowsInvalidEmailExceptionIfEmailSuppliedDoesNotMatchStored() {
+		List<Seat> seats3 = getSeatsList(3);
+		List<Seat> seats2 = getSeatsList(2);
+		Mockito.when(venue.holdSeats(3)).thenReturn(seats3);
+		Mockito.when(venue.holdSeats(2)).thenReturn(seats2);
+		
+		ticketServiceImpl.findAndHoldSeats(3, "test@test.com");
+		SeatHold result2 = ticketServiceImpl.findAndHoldSeats(2, "unique@test.com");
+		
+		ticketServiceImpl.reserveSeats(result2.getId(), "test@test.com");
 	}
 
 	private List<Seat> getSeatsList(int numSeats) {
