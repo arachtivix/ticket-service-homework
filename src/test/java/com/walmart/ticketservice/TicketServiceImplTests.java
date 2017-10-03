@@ -4,6 +4,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,6 +63,18 @@ public class TicketServiceImplTests {
 	public void testServiceThrowsSeatsUnavailableExceptionWhenUnableToFulfillFindAndHoldSeats() {
 		Mockito.when(venue.holdSeats(Mockito.anyInt())).thenThrow(new SeatsUnavailableException("test"));
 		ticketServiceImpl.findAndHoldSeats(venue.getNumSeatsAvailable() + 1, "test@test.com");
+	}
+	
+	@Test
+	public void testServiceReturnsSeatHoldObjectWithTheNumerRequested() {
+		List<Seat> seats = new LinkedList<Seat>();
+		seats.add(new Seat());
+		seats.add(new Seat());
+		seats.add(new Seat());
+		Mockito.when(venue.holdSeats(3)).thenReturn(seats);
+		
+		SeatHold result = ticketServiceImpl.findAndHoldSeats(3, "test@test.com");
+		assertThat(result.getSeats().size(), equalTo(3));
 	}
 	
 }

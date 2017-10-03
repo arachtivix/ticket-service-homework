@@ -1,5 +1,7 @@
 package com.walmart.ticketservice;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +22,9 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public SeatHold findAndHoldSeats(int numSeats, String customerEmail) {
-		venue.holdSeats(numSeats);
-		return new SeatHold(0);
+		List<Seat> seatsHeld = venue.holdSeats(numSeats);
+		SeatHold hold = new SeatHold(0,seatsHeld);
+		return hold;
 	}
 
 	@Override
