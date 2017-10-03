@@ -25,7 +25,7 @@ public class TicketServiceImpl implements TicketService {
 		} catch( SeatsUnavailableException e ) {
 			e.printStackTrace();
 		}
-		return null;
+		return new SeatHold(0);
 	}
 
 	@Override
