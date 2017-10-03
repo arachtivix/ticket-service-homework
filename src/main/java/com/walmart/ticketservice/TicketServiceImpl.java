@@ -14,6 +14,7 @@ public class TicketServiceImpl implements TicketService {
 	private final Venue venue;
 	private final EmailValidator emailValidator;
 	private Map<Integer,SeatHold> holds;
+	private Map<Integer,SeatHold> reservations;
 	private int holdIndex = 0;
 	
 	@Value("${ticket-service.shell.cmd.reserve-seats.results}")
@@ -24,6 +25,7 @@ public class TicketServiceImpl implements TicketService {
 		this.venue = venue;
 		this.emailValidator = emailValidator;
 		holds = new HashMap<Integer,SeatHold>();
+		reservations = new HashMap<Integer,SeatHold>();
 	}
 
 	@Override
@@ -51,6 +53,8 @@ public class TicketServiceImpl implements TicketService {
 		} else if ( !hold.getEmail().equalsIgnoreCase(customerEmail) ){
 			throw new InvalidEmailException("Email supplied does not match the one given for the hold");
 		}
+		
+		reservations.put(seatHoldId, holds.remove(seatHoldId));
 		
 		return String.format(reserveSuccessMessage, hold.getId());
 	}

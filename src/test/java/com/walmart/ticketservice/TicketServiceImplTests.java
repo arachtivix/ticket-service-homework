@@ -125,6 +125,16 @@ public class TicketServiceImplTests {
 		
 		ticketServiceImpl.reserveSeats(result2.getId(), "test@test.com");
 	}
+	
+	@Test(expected = SeatsUnavailableException.class)
+	public void testReserveSeatsThrowsSeatsUnavailableExceptionIfReserveSeatsAlreadyCalledOnce() {
+		List<Seat> seats3 = getSeatsList(3);
+		Mockito.when(venue.holdSeats(3)).thenReturn(seats3);
+		SeatHold result3 = ticketServiceImpl.findAndHoldSeats(3, "test@test.com");
+
+		ticketServiceImpl.reserveSeats(result3.getId(), "test@test.com");
+		ticketServiceImpl.reserveSeats(result3.getId(), "test@test.com");
+	}
 
 	private List<Seat> getSeatsList(int numSeats) {
 		List<Seat> seats = new LinkedList<Seat>();
