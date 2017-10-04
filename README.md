@@ -4,10 +4,14 @@ This project was created using a starter project from https://start.spring.io/ a
 
 The com.walmart.ticketservice.TicketService interface provides the core API, which is driven by the command interactive command line and TicketServiceApplication classes.
 
-This project requires JDK 8.
+This project requires JDK 8 and git.
 
 ## Build
 
+Clone this project:
+```
+git clone https://github.com/arachtivix/ticket-service-homework
+```
 To build in Windows, use:
 ```
 gradlew clean build
