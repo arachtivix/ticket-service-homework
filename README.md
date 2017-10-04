@@ -37,8 +37,8 @@ java -jar ticket-service-1.0.0-RELEASE.jar
 ```
 You should see the Spring Boot masthead followed by a few lines of Spring Boot chatter, then followed by this application's usage instructions:
 ```
-Get the number of seats with: 	numseats
-Hold seats with: 				hold <num seats> <email address>
+Get the number of seats with: 		numseats
+Hold seats with: 			hold <num seats> <email address>
 Reserve seats with: 			reserve <seat hold id> <email address>
 Exit the program with: 			exit <seat hold id> <email address>
 ```
