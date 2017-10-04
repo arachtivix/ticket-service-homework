@@ -61,6 +61,7 @@ Your 2 seats are reserved for danielcswerner@gmail.com
 :exit
 ```
 ### Attempt to hold more seats than available
+```
 Please enter your command
 :numseats
 1000
@@ -69,7 +70,9 @@ Reservation ID: 0
 :hold 2 danielcswerner@gmail.com
 User asked for more seats than there were available
 :exit
+```
 ### Attempt to reserve seats held under a different email
+```
 Please enter your command
 :numseats
 1000
@@ -78,3 +81,4 @@ Reservation ID: 0
 :reserve 0 someone-else@another-place.com
 Email supplied does not match the one given for the hold
 :exit
+```
